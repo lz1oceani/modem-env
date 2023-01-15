@@ -5,8 +5,6 @@ import numpy as np
 
 curr_dir = os.path.dirname(os.path.abspath(__file__))
 
-print("RS:> Registering Biomechanics Envs")
-
 # Finger-tip reaching ==============================
 reach_horizon = 100
 register(

@@ -2,7 +2,7 @@ import collections
 import gym
 import numpy as np
 
-from mj_envs.envs import env_base
+from .. import env_base
 
 VIZ = False
 

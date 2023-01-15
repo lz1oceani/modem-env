@@ -3,11 +3,11 @@
 import numpy as np
 from gym import utils
 from mjrl.envs import mujoco_env
-from mj_envs.robot.robot import Robot
+from ...robot.robot import Robot
 
 from mujoco_py import MjViewer
 import os
-from mj_envs.utils.obj_vec_dict import ObsVecDict
+from ...utils.obj_vec_dict import ObsVecDict
 import collections
 from gym import spaces
 

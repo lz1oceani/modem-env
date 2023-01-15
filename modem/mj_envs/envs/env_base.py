@@ -3,8 +3,8 @@ import numpy as np
 import os
 import time as timer
 
-from mj_envs.utils.obj_vec_dict import ObsVecDict
-from mj_envs.robot.robot import Robot
+from ..utils.obj_vec_dict import ObsVecDict
+from ..robot.robot import Robot
 from os import path
 from xml.dom import InvalidStateErr
 
