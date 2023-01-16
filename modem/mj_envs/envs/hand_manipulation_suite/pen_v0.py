@@ -99,31 +99,26 @@ class PenEnvV0(mujoco_env.MujocoEnv, utils.EzPickle):
         ) / self.tar_length
 
         # pos cost
-        # dist = np.linalg.norm(obj_pos-desired_loc)
-        # reward = -dist
-        # # orien cost
-        # orien_similarity = np.dot(obj_orien, desired_orien)
-        # reward += orien_similarity
-
-        # if ADD_BONUS_REWARDS:
-        #     # bonus for being close to desired orientation
-        #     if dist < 0.075 and orien_similarity > 0.9:
-        #         reward += 10
-        #     if dist < 0.075 and orien_similarity > 0.95:
-        #         reward += 50
-
-        # # penalty for dropping the pen
-        # done = False
-        # if obj_pos[2] < 0.075:
-        #     reward -= 5
-        #     done = True if not starting_up else False
-
-        # reward from awac paper
         dist = np.linalg.norm(obj_pos - desired_loc)
+        reward = -dist
+        # orien cost
         orien_similarity = np.dot(obj_orien, desired_orien)
-        reward = float(dist <= 0.075) * float(orien_similarity >= 0.95) - 1.0
+        reward += orien_similarity
 
-        goal_achieved = True if (dist <= 0.075 and orien_similarity >= 0.95) else False
+        if ADD_BONUS_REWARDS:
+            # bonus for being close to desired orientation
+            if dist < 0.075 and orien_similarity > 0.9:
+                reward += 10
+            if dist < 0.075 and orien_similarity > 0.95:
+                reward += 50
+
+        # penalty for dropping the pen
+        done = False
+        if obj_pos[2] < 0.075:
+            reward -= 5
+            done = True if not starting_up else False
+
+        goal_achieved = True if (dist < 0.075 and orien_similarity > 0.95) else False
 
         return (
             self.get_obs(),
